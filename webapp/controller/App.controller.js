@@ -2,10 +2,12 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/m/MessageToast",
 	"sap/ui/model/json/JSONModel",
-	"sap/ui/model/resource/ResourceModel"
-], function (Controller, MessageToast, JSONModel, ResourceModel) {
+	"sap/ui/model/resource/ResourceModel",
+	"../formatter"
+], function (Controller, MessageToast, JSONModel, ResourceModel, formatter) {
 	"use strict";
 	return Controller.extend("udemy.openui5.passoapasso.controller.App", {
+		formatter: formatter,
 		onInit: function () {
 			// set data model on view
 			var oData = {
