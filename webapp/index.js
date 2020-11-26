@@ -1,0 +1,12 @@
+sap.ui.define([
+	"sap/ui/core/mvc/XMLView"
+], function (XMLView) {
+	"use strict";
+
+	XMLView.create({
+		viewName: "udemy.openui5.passoapasso.view.App"
+	}).then(function (oView) {
+		oView.placeAt("content");
+	});
+
+});
