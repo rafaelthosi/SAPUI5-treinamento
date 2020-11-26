@@ -8,8 +8,8 @@
 							<content>
 								<Button icon="sap-icon://account" text="{i18n>showHelloButtonText}" press=".onShowHello"/>
 								<Input value="{/recipient/name}" description="Hello {/recipient/name}" valueLiveUpdate="true" width="60%"/>
-								<List id="invoiceList" class="sapUiResponsiveMargin" width="auto" items="{invoice>/Invoices}">
-									
+								<Table id="invoiceList" class="sapUiResponsiveMargin" width="auto"
+									items="{ path: 'invoice>/Invoices', sorter: { path: 'ShipperName', group: true, descending: true } }">
 									<headerToolbar>
 										<Toolbar>
 											<Title text="Invoices"/>
@@ -17,17 +17,36 @@
 											<SearchField width="30%" search=".onFilterInvoices"/>
 										</Toolbar>
 									</headerToolbar>
-										
+									<columns>
+										<Column hAlign="End" minScreenWidth="Small" demandPopin="true" width="4em">
+											<Text text="Quantidade"/>
+										</Column>
+										<Column>
+											<Text text="Nome"/>
+										</Column>
+										<Column minScreenWidth="Small" demandPopin="true">
+											<Text text="Status"/>
+										</Column>
+										<Column minScreenWidth="Tablet" demandPopin="false">
+											<Text text="Fornecedor"/>
+										</Column>
+										<Column hAlign="End">
+											<Text text="Preço"/>
+										</Column>
+									</columns>
 									<items>
-										<ObjectListItem title="{invoice>Quantity} x {invoice>ProductName}"
-											number="{ parts: [ {path: 'invoice>ExtendedPrice'}, 'EUR' ], type: 'sap.ui.model.type.Currency' }" numberUnit="EUR"
-											numberState="{= ${invoice>ExtendedPrice} > 50 ? 'Error' : 'Success' }">
-											<firstStatus>
-												<ObjectStatus text="{ path: 'invoice>Status', formatter: '.formatter.statusText' }"/>
-											</firstStatus>
-										</ObjectListItem>
+										<ColumnListItem>
+											<cells>
+												<ObjectNumber number="{invoice>Quantity}" emphasized="false"/>
+												<ObjectIdentifier title="{invoice>ProductName}"/>
+												<Text text="{ path: 'invoice>Status', formatter: '.formatter.statusText' }"/>
+												<Text text="{invoice>ShipperName}"/>
+												<ObjectNumber number="{ parts: [{path: 'invoice>ExtendedPrice'}, 'EUR' ], type: 'sap.ui.model.type.Currency' }" unit="EUR"
+													state="{= ${invoice>ExtendedPrice} > 50 ? 'Error' : 'Success' }"/>
+											</cells>
+										</ColumnListItem>
 									</items>
-								</List>
+								</Table>
 							</content>
 						</Panel>
 					</content>
