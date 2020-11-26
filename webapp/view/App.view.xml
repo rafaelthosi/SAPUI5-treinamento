@@ -8,7 +8,16 @@
 							<content>
 								<Button icon="sap-icon://account" text="{i18n>showHelloButtonText}" press=".onShowHello"/>
 								<Input value="{/recipient/name}" description="Hello {/recipient/name}" valueLiveUpdate="true" width="60%"/>
-								<List headerText="{i18n>invoiceListTitle}" class="sapUiResponsiveMargin" width="auto" items="{invoice>/Invoices}">
+								<List id="invoiceList" class="sapUiResponsiveMargin" width="auto" items="{invoice>/Invoices}">
+									
+									<headerToolbar>
+										<Toolbar>
+											<Title text="Invoices"/>
+											<ToolbarSpacer/>
+											<SearchField width="30%" search=".onFilterInvoices"/>
+										</Toolbar>
+									</headerToolbar>
+										
 									<items>
 										<ObjectListItem title="{invoice>Quantity} x {invoice>ProductName}"
 											number="{ parts: [ {path: 'invoice>ExtendedPrice'}, 'EUR' ], type: 'sap.ui.model.type.Currency' }" numberUnit="EUR"
